@@ -130,7 +130,7 @@ jobs:
       uses: haya14busa/action-cond@v1
       id: buildtree
       with:
-        cond: ${{ github.event.inputs.MANIFEST_BRANCH == 'twrp-11' || github.event.inputs.MANIFEST_BRANCH == 'twrp-12.1' }}
+        cond: ${{ github.event.inputs.MANIFEST_BRANCH == 'twrp-11' || github.event.inputs.MANIFEST_BRANCH == 'main' }}
         if_true: twrp
         if_false: omni
 
@@ -147,9 +147,8 @@ jobs:
         swap-size-gb: 12
 
     - name: Check Build Branch
-      if: ${{ github.event.inputs.MANIFEST_BRANCH == 'twrp-12.1' }}
+      if: ${{ github.event.inputs.MANIFEST_BRANCH == 'main' }}
       run: |
-        rm -rf out/.module_paths
         source build/envsetup.sh
         repopick 5405 5540
       working-directory: ${{ steps.pwd.outputs.pwd }}
